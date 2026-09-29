@@ -3,100 +3,273 @@
 <head>
   <meta charset="utf-8">
   <title>JavaScript Fundamentals</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha@10.8.2/mocha.css">
   <style>
-    body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.5; margin: 0; background: #fff; color: #222; }
     .page { max-width: 780px; margin: 40px auto; padding: 0 20px; }
     h1 { margin-bottom: 4px; }
     .lead { color: #666; margin-top: 0; }
     .legend { font-size: 14px; color: #555; margin-bottom: 20px; }
-    ol { padding-left: 0; list-style: none; }
-    li { border: 1px solid #ddd; border-radius: 8px; padding: 12px 18px; margin-bottom: 10px; }
-    li.module { background: #fafafa; }
-    li h2 { margin: 0 0 4px; font-size: 16px; }
-    li h2 .n { color: #999; font-weight: normal; margin-right: 8px; }
-    li h2 .tag { font-size: 11px; font-weight: normal; text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #888; border-radius: 3px; padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
-    li h2 .tag.sprint { background: #3a7bd5; }
-    li p { margin: 4px 0; }
+    .intro { border: 1px solid #ddd; border-radius: 8px; margin: 16px 0 0; }
+    .intro > summary { display: flex; align-items: center; gap: 10px; padding: 12px 18px; cursor: pointer; list-style: none; user-select: none; }
+    .intro > summary::-webkit-details-marker { display: none; }
+    .intro > summary::before { content: "▸"; color: #999; font-size: 14px; width: 12px; transition: transform .15s; }
+    .intro[open] > summary::before { transform: rotate(90deg); }
+    .intro > summary h2 { font-size: 17px; font-weight: 600; margin: 0; }
+    .intro > .legend, .intro > .modules { margin-left: 18px; margin-right: 18px; }
+    .intro > .modules { margin-bottom: 14px; }
+    .modules { padding-left: 0; list-style: none; }
+    .modules li { border: 1px solid #ddd; border-radius: 8px; padding: 12px 18px; margin-bottom: 10px; background: #fafafa; }
+    .modules h2 { margin: 0 0 4px; font-size: 16px; }
+    .modules h2 .n { color: #999; font-weight: normal; margin-right: 8px; }
+    .modules p { margin: 4px 0; }
     .open { font-size: 14px; color: #555; }
     code { background: #f1f1f1; padding: 1px 5px; border-radius: 3px; }
     #results { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 20px; }
-    #results p { color: #666; margin: 4px 0; }
-    #mocha { margin: 20px 0 60px; }
+    #results > p { color: #666; margin: 4px 0; }
+
+    /* ---- Test results ---- */
+    #summary { font-size: 15px; margin: 16px 0 20px; padding: 10px 14px; border-radius: 8px; background: #f6f6f6; }
+    #summary .pass { color: #2e9e44; font-weight: 600; }
+    #summary .fail { color: #d33; font-weight: 600; }
+    #summary .pending { color: #888; font-weight: 600; }
+    .module { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 14px; }
+    .module > summary { display: flex; align-items: center; gap: 10px; padding: 12px 18px; cursor: pointer; list-style: none; user-select: none; }
+    .module > summary::-webkit-details-marker { display: none; }
+    .module > summary::before { content: "▸"; color: #999; font-size: 14px; width: 12px; transition: transform .15s; }
+    .module[open] > summary::before { transform: rotate(90deg); }
+    .module > summary h2 { font-size: 17px; font-weight: 600; margin: 0; flex: 1; }
+    .module > summary .counts { font-size: 13px; color: #888; white-space: nowrap; }
+    .module > summary .counts .pass { color: #2e9e44; font-weight: 600; }
+    .module > summary .counts .fail { color: #d33; font-weight: 600; }
+    .module > summary .counts .pending { color: #888; font-weight: 600; }
+    .module > .body { padding: 0 18px 14px; }
+    .block { margin: 10px 0 0; padding-left: 14px; border-left: 2px solid #eee; }
+    .block > h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #777; margin: 0 0 4px; }
+    .block .empty { font-size: 13px; color: #999; font-style: italic; margin: 2px 0 6px; }
+    .test { position: relative; margin: 0; padding: 3px 0 3px 22px; font-size: 14px; }
+    .test .icon { position: absolute; left: 0; top: 4px; width: 16px; text-align: center; font-weight: 700; line-height: 1.4; }
+    .test.pass .icon { color: #2e9e44; }
+    .test.fail .icon { color: #d33; }
+    .test.fail .title { color: #c22; }
+    .test.pending { color: #888; }
+    .test.pending .icon { color: #aaa; }
+    .test.waiting .icon { color: #ccc; }
+    .test pre { margin: 6px 0 4px; padding: 10px 12px; font: 12.5px/1.5 ui-monospace, Menlo, Consolas, monospace; color: #b22; background: #f6f6f6; border: 1px solid #e3e3e3; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; max-height: 240px; overflow: auto; }
   </style>
 </head>
 <body>
   <div class="page">
     <h1>JavaScript Fundamentals</h1>
     <p class="lead">Sixteen exercises from arithmetic to a JSON parser, ordered from easiest to hardest. Do them in order.</p>
-    <p class="legend">
-      Each exercise is one file of small functions in <code>exercises/</code>. Edit it, save, refresh this page, and read the test results at the bottom.
-      Exercise 05 is different: there you write the tests as well.
-    </p>
-    <ol>
-      <li class="module"><h2><span class="n">01</span>Numbers and arithmetic</h2>
+    <details class="intro" id="intro">
+      <summary><h2>About the sixteen exercises</h2></summary>
+      <p class="legend">
+        Each exercise is one file of small functions in <code>exercises/</code>. Edit it, save, refresh this page, and read the test results below.
+        Exercise 05 is different: there you write the tests as well.
+      </p>
+      <ol class="modules">
+      <li><h2><span class="n">01</span>Numbers and arithmetic</h2>
         <p>Return values, operators, remainder, rounding, Math helpers.</p>
-        <p class="open">edit <code>exercises/01-numbers.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">02</span>Strings</h2>
+        <p class="open">edit <code>exercises/01-numbers.js</code></p></li>
+      <li><h2><span class="n">02</span>Strings</h2>
         <p>Length, indexing, case, slicing, joining, reversing, palindromes.</p>
-        <p class="open">edit <code>exercises/02-strings.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">03</span>Conditionals</h2>
+        <p class="open">edit <code>exercises/02-strings.js</code></p></li>
+      <li><h2><span class="n">03</span>Conditionals</h2>
         <p>if / else, comparison, combining conditions, grades, leap years, triangles.</p>
-        <p class="open">edit <code>exercises/03-conditionals.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">04</span>Loops</h2>
+        <p class="open">edit <code>exercises/03-conditionals.js</code></p></li>
+      <li><h2><span class="n">04</span>Loops</h2>
         <p>for and while, accumulating a result, factorial, primes, fibonacci.</p>
-        <p class="open">edit <code>exercises/04-loops.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">05</span>Testbuilder</h2>
+        <p class="open">edit <code>exercises/04-loops.js</code></p></li>
+      <li><h2><span class="n">05</span>Testbuilder</h2>
         <p>Detect a credit card network from its number, and write the Mocha tests yourself. Teaches how tests are built before you rely on them everywhere else.</p>
-        <p class="open">edit <code>exercises/05-testbuilder.js</code> and <code>tests/05-testbuilder.test.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">06</span>Arrays</h2>
+        <p class="open">edit <code>exercises/05-testbuilder.js</code> and <code>tests/05-testbuilder.test.js</code></p></li>
+      <li><h2><span class="n">06</span>Arrays</h2>
         <p>First, last, sum, min and max, filtering, building new arrays, dedupe, chunk, zip.</p>
-        <p class="open">edit <code>exercises/06-arrays.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">07</span>Objects</h2>
+        <p class="open">edit <code>exercises/06-arrays.js</code></p></li>
+      <li><h2><span class="n">07</span>Objects</h2>
         <p>Reading and writing properties, keys and values, counting, grouping, nested lookups.</p>
-        <p class="open">edit <code>exercises/07-objects.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">08</span>JavaScript Koans</h2>
+        <p class="open">edit <code>exercises/07-objects.js</code></p></li>
+      <li><h2><span class="n">08</span>JavaScript Koans</h2>
         <p>Fill in the blanks in small tests to learn what the language really does with arrays, functions, objects, mutability and inheritance.</p>
-        <p class="open">edit <code>exercises/08-koans.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">09</span>Real-world data</h2>
+        <p class="open">edit <code>exercises/08-koans.js</code></p></li>
+      <li><h2><span class="n">09</span>Real-world data</h2>
         <p>Users, products, orders and students: find, filter, total, discount without mutating, reports.</p>
-        <p class="open">edit <code>exercises/09-real-data.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">10</span>Functions as values</h2>
+        <p class="open">edit <code>exercises/09-real-data.js</code></p></li>
+      <li><h2><span class="n">10</span>Functions as values</h2>
         <p>Passing and returning functions, closures, counters, your own map / filter / reduce, compose, memoize.</p>
-        <p class="open">edit <code>exercises/10-functions.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">11</span>Bees: ES6 classes</h2>
+        <p class="open">edit <code>exercises/10-functions.js</code></p></li>
+      <li><h2><span class="n">11</span>Bees: ES6 classes</h2>
         <p>A family of bee classes with <code>class</code>, <code>extends</code> and <code>super</code>: Grub, Bee, HoneyMakerBee, ForagerBee, RetiredForagerBee.</p>
-        <p class="open">edit <code>exercises/11-bees-es6-classes.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">12</span>Bees: pseudoclassical</h2>
+        <p class="open">edit <code>exercises/11-bees-es6-classes.js</code></p></li>
+      <li><h2><span class="n">12</span>Bees: pseudoclassical</h2>
         <p>The same bees with constructor functions and prototypes, to see what <code>class</code> does underneath.</p>
-        <p class="open">edit <code>exercises/12-bees-pseudoclassical.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">13</span>Challenges</h2>
+        <p class="open">edit <code>exercises/12-bees-pseudoclassical.js</code></p></li>
+      <li><h2><span class="n">13</span>Challenges</h2>
         <p>Anagrams, run-length encoding, caesar cipher, binary search, bubble sort, roman numerals, balanced brackets.</p>
-        <p class="open">edit <code>exercises/13-challenges.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">14</span>DOM</h2>
+        <p class="open">edit <code>exercises/13-challenges.js</code></p></li>
+      <li><h2><span class="n">14</span>DOM</h2>
         <p>Creating elements, classes, lists, click and input events, a counter widget, a todo list. See your widgets working in the <a href="playground.html">playground</a>.</p>
-        <p class="open">edit <code>exercises/14-dom.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">15</span>Recursion</h2>
+        <p class="open">edit <code>exercises/14-dom.js</code></p></li>
+      <li><h2><span class="n">15</span>Recursion</h2>
         <p>Forty prompts from factorial to merge sort and deep clone. Every function must call itself; the tests reject loops.</p>
-        <p class="open">edit <code>exercises/15-recursion.js</code>, <a href="#results">results below</a></p></li>
-      <li class="module"><h2><span class="n">16</span>Recursion on JSON and the DOM</h2>
+        <p class="open">edit <code>exercises/15-recursion.js</code></p></li>
+      <li><h2><span class="n">16</span>Recursion on JSON and the DOM</h2>
         <p>Find elements by class name by walking the DOM tree, then write JSON.stringify and JSON.parse from scratch.</p>
-        <p class="open">edit <code>exercises/16-recursion-json-dom.js</code>, <a href="#results">results below</a></p></li>
-    </ol>
+        <p class="open">edit <code>exercises/16-recursion-json-dom.js</code></p></li>
+      </ol>
+    </details>
 
     <div id="results">
       <h1>Test results</h1>
-      <p>These are the tests for the exercises above. Edit a module in <code>exercises/</code>, save, and refresh this page.</p>
-      <p>Click a group title (for example "03 - Conditionals" or "easy") to run only that group.</p>
+      <p>Every test, block by block, in the order it runs. Click a module to expand it; the page remembers which ones you left open. Edit a module in <code>exercises/</code>, save, and refresh this page.</p>
+      <div id="summary">Running tests&hellip;</div>
+      <div id="test-results"></div>
     </div>
   </div>
-
-  <div id="mocha"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/mocha@10.8.2/mocha.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chai@4.5.0/chai.js"></script>
   <script>
-    mocha.setup("bdd");
+    // A plain reporter: draws every describe block (even empty ones) and
+    // every test in run order, then fills in the result of each one.
+    // Each module is a collapsible block; nothing else on the page is clickable.
+    function BlockReporter(runner) {
+      var results = document.getElementById("test-results");
+      var summary = document.getElementById("summary");
+      var rows = new Map();      // test object -> its <li>
+      var blocks = new Map();    // suite object -> its element
+      var counts = { pass: 0, fail: 0, pending: 0 };
+
+      function el(tag, className, text) {
+        var e = document.createElement(tag);
+        if (className) e.className = className;
+        if (text != null) e.textContent = text;
+        return e;
+      }
+
+      function drawTest(test, parent) {
+        var li = el("li", "test waiting");
+        li.appendChild(el("span", "icon", "·"));
+        li.appendChild(el("span", "title", test.title));
+        parent.appendChild(li);
+        rows.set(test, li);
+      }
+
+      // Which modules are expanded is remembered in this browser.
+      var STORAGE_KEY = "js-fundamentals-open-modules";
+      function loadOpen() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; } catch (e) { return {}; }
+      }
+      function saveOpen(open) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(open)); } catch (e) {}
+      }
+      var openModules = loadOpen();
+
+      function drawSuite(suite, parent, depth) {
+        var box;
+        if (depth === 0) {
+          var details = el("details", "module");
+          details.open = openModules[suite.title] === true;
+          var summary = el("summary");
+          summary.appendChild(el("h2", null, suite.title));
+          summary.appendChild(el("span", "counts", "running…"));
+          details.appendChild(summary);
+          details.addEventListener("toggle", function() {
+            if (details.open) openModules[suite.title] = true; else delete openModules[suite.title];
+            saveOpen(openModules);
+          });
+          box = el("div", "body");
+          details.appendChild(box);
+          parent.appendChild(details);
+          blocks.set(suite, box);
+          if (suite.tests.length === 0 && suite.suites.length === 0) {
+            box.appendChild(el("p", "empty", "No tests in this block yet."));
+          }
+          if (suite.tests.length) {
+            var topList = el("ul", "tests");
+            topList.style.listStyle = "none"; topList.style.margin = "0"; topList.style.padding = "0";
+            suite.tests.forEach(function(t) { drawTest(t, topList); });
+            box.appendChild(topList);
+          }
+          suite.suites.forEach(function(child) { drawSuite(child, box, depth + 1); });
+          return;
+        }
+        box = el("div", "block");
+        box.appendChild(el("h3", null, suite.title));
+        blocks.set(suite, box);
+        if (suite.tests.length === 0 && suite.suites.length === 0) {
+          box.appendChild(el("p", "empty", "No tests in this block yet."));
+        }
+        if (suite.tests.length) {
+          var list = el("ul", "tests");
+          list.style.listStyle = "none"; list.style.margin = "0"; list.style.padding = "0";
+          suite.tests.forEach(function(t) { drawTest(t, list); });
+          box.appendChild(list);
+        }
+        suite.suites.forEach(function(child) { drawSuite(child, box, depth + 1); });
+        parent.appendChild(box);
+      }
+
+      function errorText(err) {
+        var msg = (err && err.message) ? err.message : String(err);
+        var stack = (err && err.stack) ? String(err.stack) : "";
+        var where = stack.split("\n").filter(function(l) { return /\b(tests|exercises)\//.test(l); })[0];
+        return where ? msg + "\n" + where.trim() : msg;
+      }
+
+      function mark(test, status, err) {
+        var li = rows.get(test);
+        if (!li) {
+          // A failing before/after hook has no row of its own: show it in its block.
+          var box = blocks.get(test.parent);
+          if (box) { li = el("li", "test"); li.appendChild(el("span", "icon", "")); li.appendChild(el("span", "title", test.title)); box.appendChild(li); }
+          else return;
+        }
+        li.className = "test " + status;
+        li.querySelector(".icon").textContent = status === "pass" ? "✓" : status === "fail" ? "✖" : "◦";
+        if (status === "pending") li.querySelector(".title").textContent += " (pending)";
+        if (err) li.appendChild(el("pre", null, errorText(err)));
+        counts[status]++;
+      }
+
+      runner.on("start", function() {
+        runner.suite.suites.forEach(function(s) { drawSuite(s, results, 0); });
+      });
+      runner.on("pass", function(test) { mark(test, "pass"); });
+      runner.on("fail", function(test, err) { mark(test, "fail", err); });
+      runner.on("pending", function(test) { mark(test, "pending"); });
+      runner.on("end", function() {
+        results.querySelectorAll("details.module").forEach(function(details) {
+          var n = function(cls) { return details.querySelectorAll(".test." + cls).length; };
+          var c = details.querySelector(".counts");
+          c.textContent = "";
+          c.appendChild(el("span", "pass", n("pass") + " passed"));
+          c.appendChild(document.createTextNode(", "));
+          c.appendChild(el("span", "fail", n("fail") + " failed"));
+          if (n("pending")) { c.appendChild(document.createTextNode(", ")); c.appendChild(el("span", "pending", n("pending") + " pending")); }
+        });
+        var total = counts.pass + counts.fail + counts.pending;
+        summary.innerHTML = "";
+        summary.appendChild(document.createTextNode(total + " tests: "));
+        summary.appendChild(el("span", "pass", counts.pass + " passed"));
+        summary.appendChild(document.createTextNode(", "));
+        summary.appendChild(el("span", "fail", counts.fail + " failed"));
+        summary.appendChild(document.createTextNode(", "));
+        summary.appendChild(el("span", "pending", counts.pending + " pending"));
+      });
+    }
+
+    // The exercise list at the top is collapsible too, and remembered the same way.
+    (function() {
+      var intro = document.getElementById("intro");
+      var KEY = "js-fundamentals-intro-open";
+      try { intro.open = localStorage.getItem(KEY) === "1"; } catch (e) {}
+      intro.addEventListener("toggle", function() {
+        try { localStorage.setItem(KEY, intro.open ? "1" : "0"); } catch (e) {}
+      });
+    })();
+
+    mocha.setup({ ui: "bdd", reporter: BlockReporter });
     window.expect = chai.expect;
 
     // Tiny stand-ins for Node's `module.exports` and `require`, so the exercise

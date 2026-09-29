@@ -44,8 +44,10 @@ All paths are inside `exercises/`.
 
 ## Running the tests
 
-Open `index.html`. The results are at the bottom of the page. Click a group
-title (for example "03 - Conditionals" or "hard") to show only that group.
+Open `index.html`. The results are at the bottom of the page, one collapsed
+block per module with its pass and fail counts in the header. Click a module
+to expand it; the browser remembers which ones you left open. Inside, every
+test appears block by block in the order it runs.
 
 Exercise 14 (DOM) also has `playground.html`, linked from `index.html`, which
 shows your DOM functions working on a real page.
