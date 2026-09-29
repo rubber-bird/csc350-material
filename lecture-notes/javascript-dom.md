@@ -1,5 +1,3 @@
-<div align="center">
-
 # JavaScript & DOM manipulation - Lecture notes
 
 ## Contents
@@ -764,6 +762,3 @@ This keeps HTML and JavaScript separate, the same way CSS keeps styling separate
 |---|---|
 | Why `innerHTML` with user text is dangerous | [XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) |
 
-<div align="center">
-
-</div>

@@ -1,8 +1,4 @@
-<div align="center">
-
 # CSC 350 - Lecture notes
-
-</div>
 
 Notes for each topic in the order they're taught. Every file follows the same layout: Overview, Core Concepts, Important Facts & Definitions, Practical Examples, Nice to know, Further Reading. The first three also have a Going further section and Optional practice exercises.
 

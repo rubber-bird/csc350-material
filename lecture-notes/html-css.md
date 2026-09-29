@@ -1,5 +1,3 @@
-<div align="center">
-
 # HTML & CSS - Lecture notes
 
 ## Contents
@@ -691,6 +689,3 @@ Right-click any element on any web page and choose **Inspect** (or press F12). T
 | Check your HTML | [W3C Markup Validator](https://validator.w3.org/) |
 | Check your CSS | [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) |
 
-<div align="center">
-
-</div>

@@ -1,5 +1,3 @@
-<div align="center">
-
 # PHP - Lecture notes
 
 ## Contents
@@ -995,6 +993,3 @@ Then `value="<?= e(post('city')) ?>"` in a sticky form does the reading, trimmin
 | Escaping output | [XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) |
 | Validating input | [Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) |
 
-<div align="center">
-
-</div>
