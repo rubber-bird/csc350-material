@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DOM Playground</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; }
+    section { border: 1px solid #ddd; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; }
+    h2 { margin-top: 0; font-size: 18px; }
+    button { padding: 4px 12px; margin: 0 4px; }
+    input { padding: 6px; }
+    .done { text-decoration: line-through; color: #888; }
+    .person { background: #f6f6f6; padding: 10px 14px; border-radius: 6px; }
+    .person h2 { margin: 0 0 4px; }
+    .person p { margin: 0; }
+    .hint { color: #888; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>DOM Playground</h1>
+  <p>Each box calls one of your functions from <code>exercises/14-dom.js</code>.
+     Solve the exercise, refresh, and see it work. Boxes stay empty until you do.</p>
+
+  <section>
+    <h2>createHeading + appendTo</h2>
+    <div id="heading-box"></div>
+    <p class="hint">Should show a big "Hello, DOM!" heading.</p>
+  </section>
+
+  <section>
+    <h2>makeList</h2>
+    <div id="list-box"></div>
+    <p class="hint">Should show a bullet list: milk, eggs, bread.</p>
+  </section>
+
+  <section>
+    <h2>renderPerson</h2>
+    <div id="person-box"></div>
+    <p class="hint">Should show a grey card for Sam, 30 years old.</p>
+  </section>
+
+  <section>
+    <h2>onClickSetText</h2>
+    <button id="click-btn">Click me</button>
+    <p id="click-out"></p>
+    <p class="hint">Clicking the button should show a message below it.</p>
+  </section>
+
+  <section>
+    <h2>bindInput</h2>
+    <input id="typed-in" placeholder="type here">
+    <p>You typed: <strong id="typed-out"></strong></p>
+  </section>
+
+  <section>
+    <h2>makeCounterWidget</h2>
+    <div id="counter-box"></div>
+    <p class="hint">Should show - 0 + and the number should change on click.</p>
+  </section>
+
+  <section>
+    <h2>renderTodos</h2>
+    <div id="todo-box"></div>
+    <p class="hint">Done items appear crossed out.</p>
+  </section>
+
+  <section>
+    <h2>filterList</h2>
+    <input id="filter-in" placeholder="filter fruits">
+    <div id="filter-box"></div>
+  </section>
+
+  <script>
+    // Same tiny stand-in for module.exports as index.html uses.
+    var module = { exports: {} };
+  </script>
+  <script src="exercises/14-dom.js"></script>
+  <script>
+    const dom = module.exports;
+    const $ = (id) => document.getElementById(id);
+
+    // Each block is wrapped in try/catch so one unfinished exercise
+    // does not stop the others from showing.
+    const attempt = (fn) => { try { fn(); } catch (e) { console.warn(e.message); } };
+
+    attempt(() => dom.appendTo($("heading-box"), dom.createHeading("Hello, DOM!")));
+
+    attempt(() => $("list-box").appendChild(dom.makeList(["milk", "eggs", "bread"])));
+
+    attempt(() => $("person-box").appendChild(dom.renderPerson({ name: "Sam", age: 30 })));
+
+    attempt(() => dom.onClickSetText($("click-btn"), $("click-out"), "You clicked the button!"));
+
+    attempt(() => dom.bindInput($("typed-in"), $("typed-out")));
+
+    attempt(() => dom.makeCounterWidget($("counter-box")));
+
+    attempt(() => dom.renderTodos($("todo-box"), [
+      { text: "Learn the DOM", done: true },
+      { text: "Build a todo app", done: false },
+      { text: "Take a break", done: false },
+    ]));
+
+    attempt(() => {
+      const ul = dom.makeList(["Apple", "Banana", "Cherry", "Mango", "Orange"]);
+      $("filter-box").appendChild(ul);
+      $("filter-in").addEventListener("input", () => dom.filterList(ul, $("filter-in").value));
+    });
+  </script>
+</body>
+</html>

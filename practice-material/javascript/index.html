@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JavaScript Fundamentals</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha@10.8.2/mocha.css">
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; line-height: 1.5; margin: 0; }
+    .page { max-width: 780px; margin: 40px auto; padding: 0 20px; }
+    h1 { margin-bottom: 4px; }
+    .lead { color: #666; margin-top: 0; }
+    .legend { font-size: 14px; color: #555; margin-bottom: 20px; }
+    ol { padding-left: 0; list-style: none; }
+    li { border: 1px solid #ddd; border-radius: 8px; padding: 12px 18px; margin-bottom: 10px; }
+    li.module { background: #fafafa; }
+    li h2 { margin: 0 0 4px; font-size: 16px; }
+    li h2 .n { color: #999; font-weight: normal; margin-right: 8px; }
+    li h2 .tag { font-size: 11px; font-weight: normal; text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #888; border-radius: 3px; padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+    li h2 .tag.sprint { background: #3a7bd5; }
+    li p { margin: 4px 0; }
+    .open { font-size: 14px; color: #555; }
+    code { background: #f1f1f1; padding: 1px 5px; border-radius: 3px; }
+    #results { border-top: 1px solid #ddd; margin-top: 40px; padding-top: 20px; }
+    #results p { color: #666; margin: 4px 0; }
+    #mocha { margin: 20px 0 60px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>JavaScript Fundamentals</h1>
+    <p class="lead">Sixteen exercises from arithmetic to a JSON parser, ordered from easiest to hardest. Do them in order.</p>
+    <p class="legend">
+      Each exercise is one file of small functions in <code>exercises/</code>. Edit it, save, refresh this page, and read the test results at the bottom.
+      Exercise 05 is different: there you write the tests as well.
+    </p>
+    <ol>
+      <li class="module"><h2><span class="n">01</span>Numbers and arithmetic</h2>
+        <p>Return values, operators, remainder, rounding, Math helpers.</p>
+        <p class="open">edit <code>exercises/01-numbers.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">02</span>Strings</h2>
+        <p>Length, indexing, case, slicing, joining, reversing, palindromes.</p>
+        <p class="open">edit <code>exercises/02-strings.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">03</span>Conditionals</h2>
+        <p>if / else, comparison, combining conditions, grades, leap years, triangles.</p>
+        <p class="open">edit <code>exercises/03-conditionals.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">04</span>Loops</h2>
+        <p>for and while, accumulating a result, factorial, primes, fibonacci.</p>
+        <p class="open">edit <code>exercises/04-loops.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">05</span>Testbuilder</h2>
+        <p>Detect a credit card network from its number, and write the Mocha tests yourself. Teaches how tests are built before you rely on them everywhere else.</p>
+        <p class="open">edit <code>exercises/05-testbuilder.js</code> and <code>tests/05-testbuilder.test.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">06</span>Arrays</h2>
+        <p>First, last, sum, min and max, filtering, building new arrays, dedupe, chunk, zip.</p>
+        <p class="open">edit <code>exercises/06-arrays.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">07</span>Objects</h2>
+        <p>Reading and writing properties, keys and values, counting, grouping, nested lookups.</p>
+        <p class="open">edit <code>exercises/07-objects.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">08</span>JavaScript Koans</h2>
+        <p>Fill in the blanks in small tests to learn what the language really does with arrays, functions, objects, mutability and inheritance.</p>
+        <p class="open">edit <code>exercises/08-koans.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">09</span>Real-world data</h2>
+        <p>Users, products, orders and students: find, filter, total, discount without mutating, reports.</p>
+        <p class="open">edit <code>exercises/09-real-data.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">10</span>Functions as values</h2>
+        <p>Passing and returning functions, closures, counters, your own map / filter / reduce, compose, memoize.</p>
+        <p class="open">edit <code>exercises/10-functions.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">11</span>Bees: ES6 classes</h2>
+        <p>A family of bee classes with <code>class</code>, <code>extends</code> and <code>super</code>: Grub, Bee, HoneyMakerBee, ForagerBee, RetiredForagerBee.</p>
+        <p class="open">edit <code>exercises/11-bees-es6-classes.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">12</span>Bees: pseudoclassical</h2>
+        <p>The same bees with constructor functions and prototypes, to see what <code>class</code> does underneath.</p>
+        <p class="open">edit <code>exercises/12-bees-pseudoclassical.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">13</span>Challenges</h2>
+        <p>Anagrams, run-length encoding, caesar cipher, binary search, bubble sort, roman numerals, balanced brackets.</p>
+        <p class="open">edit <code>exercises/13-challenges.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">14</span>DOM</h2>
+        <p>Creating elements, classes, lists, click and input events, a counter widget, a todo list. See your widgets working in the <a href="playground.html">playground</a>.</p>
+        <p class="open">edit <code>exercises/14-dom.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">15</span>Recursion</h2>
+        <p>Forty prompts from factorial to merge sort and deep clone. Every function must call itself; the tests reject loops.</p>
+        <p class="open">edit <code>exercises/15-recursion.js</code>, <a href="#results">results below</a></p></li>
+      <li class="module"><h2><span class="n">16</span>Recursion on JSON and the DOM</h2>
+        <p>Find elements by class name by walking the DOM tree, then write JSON.stringify and JSON.parse from scratch.</p>
+        <p class="open">edit <code>exercises/16-recursion-json-dom.js</code>, <a href="#results">results below</a></p></li>
+    </ol>
+
+    <div id="results">
+      <h1>Test results</h1>
+      <p>These are the tests for the exercises above. Edit a module in <code>exercises/</code>, save, and refresh this page.</p>
+      <p>Click a group title (for example "03 - Conditionals" or "easy") to run only that group.</p>
+    </div>
+  </div>
+
+  <div id="mocha"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mocha@10.8.2/mocha.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chai@4.5.0/chai.js"></script>
+  <script>
+    mocha.setup("bdd");
+    window.expect = chai.expect;
+
+    // Tiny stand-ins for Node's `module.exports` and `require`, so the exercise
+    // and test files can be loaded here without any changes.
+    var __modules = {};
+    var module = { exports: {} };
+    function __save(name) {
+      __modules[name] = module.exports;
+      module = { exports: {} };
+    }
+    function require(path) {
+      return __modules[path.replace("../exercises/", "")];
+    }
+  </script>
+
+  <!-- Exercises -->
+  <script src="exercises/01-numbers.js"></script>         <script>__save("01-numbers")</script>
+  <script src="exercises/02-strings.js"></script>         <script>__save("02-strings")</script>
+  <script src="exercises/03-conditionals.js"></script>    <script>__save("03-conditionals")</script>
+  <script src="exercises/04-loops.js"></script>           <script>__save("04-loops")</script>
+  <script src="exercises/05-testbuilder.js"></script>     <script>__save("05-testbuilder")</script>
+  <script src="exercises/06-arrays.js"></script>          <script>__save("06-arrays")</script>
+  <script src="exercises/07-objects.js"></script>         <script>__save("07-objects")</script>
+  <script src="exercises/08-koans.js"></script>            <script>__save("08-koans")</script>
+  <script src="exercises/09-real-data.js"></script>       <script>__save("09-real-data")</script>
+  <script src="exercises/10-functions.js"></script>       <script>__save("10-functions")</script>
+  <script src="exercises/11-bees-es6-classes.js"></script> <script>__save("11-bees-es6-classes")</script>
+  <script src="exercises/12-bees-pseudoclassical.js"></script> <script>__save("12-bees-pseudoclassical")</script>
+  <script src="exercises/13-challenges.js"></script>      <script>__save("13-challenges")</script>
+  <script src="exercises/14-dom.js"></script>             <script>__save("14-dom")</script>
+  <script src="exercises/15-recursion.js"></script>       <script>__save("15-recursion")</script>
+  <script src="exercises/16-recursion-json-dom.js"></script> <script>__save("16-recursion-json-dom")</script>
+
+  <!-- Tests -->
+  <script src="tests/01-numbers.test.js"></script>
+  <script src="tests/02-strings.test.js"></script>
+  <script src="tests/03-conditionals.test.js"></script>
+  <script src="tests/04-loops.test.js"></script>
+  <script src="tests/05-testbuilder.test.js"></script>
+  <script src="tests/06-arrays.test.js"></script>
+  <script src="tests/07-objects.test.js"></script>
+  <script src="tests/08-koans.test.js"></script>
+  <script src="tests/09-real-data.test.js"></script>
+  <script src="tests/10-functions.test.js"></script>
+  <script src="tests/11-bees-es6-classes.test.js"></script>
+  <script src="tests/12-bees-pseudoclassical.test.js"></script>
+  <script src="tests/13-challenges.test.js"></script>
+  <script src="tests/14-dom.test.js"></script>
+  <script src="tests/15-recursion.test.js"></script>
+  <script src="tests/16-recursion-json-dom.test.js"></script>
+
+  <script>mocha.run();</script>
+</body>
+</html>
