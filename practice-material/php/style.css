@@ -1,0 +1,23 @@
+body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; margin: 0 auto; max-width: 900px; padding: 16px; color: #222; background: #fafafa; }
+body.frame { background: #fff; padding: 8px 12px; }
+h1 { font-size: 1.6em; }
+h2.group { font-size: 1.25em; margin: 12px 0 4px; }
+h3.group { font-size: 1em; margin: 10px 0 2px 12px; text-transform: uppercase; letter-spacing: .05em; color: #666; }
+h4.group { font-size: 1em; margin: 8px 0 2px 24px; }
+.hint { color: #666; }
+nav a { display: inline-block; margin: 0 8px 8px 0; padding: 4px 10px; background: #eee; border-radius: 4px; text-decoration: none; color: #222; }
+nav a:hover { background: #ddd; }
+section { margin: 12px 0; }
+iframe { width: 100%; border: 1px solid #ddd; border-radius: 6px; background: #fff; min-height: 60px; }
+.test { margin: 2px 0 2px 24px; font-family: Menlo, Consolas, monospace; font-size: 13px; }
+.test .mark { display: inline-block; width: 1.2em; }
+.test.pass { color: #1a7f37; }
+.test.fail { color: #b3261e; }
+.test pre { margin: 4px 0 8px 1.5em; padding: 6px 8px; background: #fff3f2; border-left: 3px solid #b3261e; white-space: pre-wrap; }
+.summary { font-weight: bold; margin-top: 12px; }
+.summary.pass { color: #1a7f37; }
+.summary.fail { color: #b3261e; }
+.hint { margin: 4px 0 8px 1.5em; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: #444; }
+.hint summary { cursor: pointer; color: #8a5a00; font-weight: 600; }
+.hint p { margin: 4px 0 6px; }
+.hint .hint { margin-left: 1em; }
