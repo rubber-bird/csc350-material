@@ -1,23 +1,29 @@
-body { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; margin: 0 auto; max-width: 900px; padding: 16px; color: #222; background: #fafafa; }
-body.frame { background: #fff; padding: 8px 12px; }
-h1 { font-size: 1.6em; }
-h2.group { font-size: 1.25em; margin: 12px 0 4px; }
-h3.group { font-size: 1em; margin: 10px 0 2px 12px; text-transform: uppercase; letter-spacing: .05em; color: #666; }
-h4.group { font-size: 1em; margin: 8px 0 2px 24px; }
-.hint { color: #666; }
-nav a { display: inline-block; margin: 0 8px 8px 0; padding: 4px 10px; background: #eee; border-radius: 4px; text-decoration: none; color: #222; }
-nav a:hover { background: #ddd; }
-section { margin: 12px 0; }
-iframe { width: 100%; border: 1px solid #ddd; border-radius: 6px; background: #fff; min-height: 60px; }
-.test { margin: 2px 0 2px 24px; font-family: Menlo, Consolas, monospace; font-size: 13px; }
-.test .mark { display: inline-block; width: 1.2em; }
-.test.pass { color: #1a7f37; }
-.test.fail { color: #b3261e; }
-.test pre { margin: 4px 0 8px 1.5em; padding: 6px 8px; background: #fff3f2; border-left: 3px solid #b3261e; white-space: pre-wrap; }
-.summary { font-weight: bold; margin-top: 12px; }
-.summary.pass { color: #1a7f37; }
-.summary.fail { color: #b3261e; }
-.hint { margin: 4px 0 8px 1.5em; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: #444; }
+body { font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.5; margin: 0 auto; max-width: 780px; padding: 40px 20px; color: #222; background: #fff; }
+h1 { font-size: 1.6em; margin: 0 0 4px; }
+.lead { color: #666; margin: 0 0 16px; }
+code { background: #f1f1f1; padding: 1px 5px; border-radius: 3px; }
+
+.summary { font-size: 15px; margin: 0 0 20px; padding: 10px 14px; border-radius: 8px; background: #f6f6f6; }
+.summary .pass { color: #2e9e44; font-weight: 600; }
+.summary .fail { color: #d33; font-weight: 600; }
+
+.module { border: 1px solid #ddd; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+.module-summary { font-size: 13px; color: #888; margin: 10px 0 0; }
+h2.group { font-size: 17px; font-weight: 600; margin: 0 0 8px; }
+h3.group { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: #777; margin: 10px 0 4px 14px; padding-left: 0; }
+h4.group { font-size: 14px; font-weight: 600; color: #555; margin: 8px 0 2px 28px; }
+
+.test { position: relative; margin: 0 0 0 14px; padding: 3px 0 3px 22px; font-size: 14px; }
+.test .mark { position: absolute; left: 0; top: 4px; width: 16px; text-align: center; font-weight: 700; line-height: 1.4; }
+.test.pass .mark { color: #2e9e44; }
+.test.fail .mark { color: #d33; }
+.test.fail { color: #c22; }
+.test pre { margin: 6px 0 4px; padding: 10px 12px; font: 12.5px/1.5 ui-monospace, Menlo, Consolas, monospace; color: #b22; background: #f6f6f6; border: 1px solid #e3e3e3; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; }
+
+.broken { margin: 6px 0; padding: 10px 12px; border-radius: 6px; background: #fff3f2; border: 1px solid #f0c8c4; color: #b22; font-size: 14px; }
+.broken pre { margin: 6px 0 0; font: 12.5px/1.5 ui-monospace, Menlo, Consolas, monospace; white-space: pre-wrap; word-wrap: break-word; }
+
+.hint { margin: 4px 0 8px; color: #444; font-size: 14px; }
 .hint summary { cursor: pointer; color: #8a5a00; font-weight: 600; }
 .hint p { margin: 4px 0 6px; }
 .hint .hint { margin-left: 1em; }

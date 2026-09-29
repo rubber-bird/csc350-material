@@ -9,7 +9,7 @@ Two sets of self-checking exercises. Each is a folder of files full of small fun
 | # | Folder | Exercises | Needs | Start here |
 |:---:|---|:---:|---|---|
 | 1 | [javascript/](javascript/README.md) | 16 | a browser and internet | open `javascript/index.html` |
-| 2 | [php/](php/README.md) | 8 | XAMPP with Apache running (see below) | open http://localhost/php-fundamentals/ |
+| 2 | [php/](php/README.md) | 16 | XAMPP with Apache running (see below) | open http://localhost/php-fundamentals/ |
 
 Each folder's own README explains its exercises, how to read a failing test, and what's under the hood. Both use the same test vocabulary (`describe`, `it`, `expect`), so once you've read one set of results you can read the other.
 

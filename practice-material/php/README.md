@@ -1,8 +1,14 @@
 # PHP Fundamentals
 
-Eight exercise files from arithmetic to rendering a web page, ordered from
-easiest to hardest. They run inside XAMPP, so you also learn how PHP is
-served by a real web server. Nothing else to install.
+Sixteen exercise files, ordered from easiest to hardest. The first eight
+go from arithmetic to rendering a web page. The next five are the harder
+things a real site is made of: reshaping database records, parsing text,
+interfaces and exceptions, validating forms and handling passwords, and
+talking to a database with PDO. The last three are generators and trees,
+an HTTP request/router/middleware layer, and a complete small application
+with registration, login, sessions, CSRF and a JSON API. They run inside
+XAMPP, so you also learn how PHP is served by a real web server. Nothing
+else to install.
 
 ## Setup
 
@@ -24,8 +30,8 @@ task: a description, **Input**, **Output**, and **Examples**. Each file has
 EASY, MEDIUM and HARD sections, and starts with a list of the built-in PHP
 functions you will need, each linked to its page in the PHP manual.
 
-Edit a file in `exercises/`, save, and refresh the browser. Click a module
-name at the top of the page to see only that module.
+Edit a file in `exercises/`, save, and refresh the browser. The page shows
+every module, block by block, in the order the tests run.
 
 ## The order
 
@@ -39,8 +45,25 @@ name at the top of the page to see only that module.
 | 06 | `06-functions.php` | functions as values, closures, arrow functions |
 | 07 | `07-objects.php` | classes, `$this`, private, inheritance, static |
 | 08 | `08-html.php` | turning data into HTML, escaping user input |
+| 09 | `09-records.php` | lists of records: `array_column`, multi-key `usort` with `<=>`, grouping, pivot tables, pagination, recursive merge and flatten |
+| 10 | `10-text.php` | slugs, truncation, byte sizes, a CSV parser, `{{template}}` rendering, regular expressions, text wrapping, a config parser, safe highlighting |
+| 11 | `11-oop.php` | interfaces, abstract classes, static factories, exceptions, enums, `readonly` value objects, `Countable` / `IteratorAggregate` / `ArrayAccess`, an event emitter, a fluent query builder |
+| 12 | `12-validation.php` | cleaning input, a registration validator, `password_hash` / `password_verify`, random tokens, CSRF, a login throttle, a `required\|email\|min:2` rule language |
+| 13 | `13-database.php` | PDO with prepared statements: schema, insert, find, paging, update and delete, register and login, a transaction, a `LIKE` search that survives `%` and quotes |
+| 14 | `14-generators-trees.php` | generators and `yield`, lazy `take` / `chunked` / `map` over infinite sequences, reading a file line by line, flat rows to a nested tree and back, an LRU cache, memoization with a TTL |
+| 15 | `15-routing.php` | `Request` and `Response` objects, a `Router` with `{placeholders}`, 404 and 405, flash messages, a middleware `Pipeline`, building URLs |
+| 16 | `16-app.php` | everything together: a `UserRepository` on PDO and an `App` with register, login, dashboard, logout and a paginated JSON API, with CSRF tokens, sessions, hashing and escaped output, tested as browser-like flows |
 
 All paths are inside `exercises/`.
+
+Module 13 runs against an SQLite database in memory that the tests create
+for each function, so nothing has to be started; XAMPP's PHP includes the
+SQLite driver. The same PDO code works against MySQL in the term project.
+
+Module 16 loads module 15's classes, so finish 15 first. Its tests drive
+the application request by request through one shared session array, the
+way a browser would, so a broken step shows up as the status code or the
+page text a user would have seen.
 
 Module 08 has a second page: http://localhost/php-fundamentals/playground.php
 renders your HTML functions with real data. Add `?name=Ada` to the address,
@@ -110,8 +133,11 @@ by its name, for example https://www.php.net/strlen.
 
 ## Under the hood
 
-- `index.php` finds every file in `tests/` and shows each one inside its
-  own frame, so a syntax error in one exercise does not hide the others.
+- `index.php` finds every file in `tests/` and runs each one in turn on a
+  single page. A syntax error in one exercise is reported in its place and
+  the other modules still run. A fatal error PHP cannot recover from (for
+  example the same function declared twice) stops the page at that module
+  and names the file, so fix that first.
 - `spec.php` is a tiny test runner that provides `describe`, `it` and
   `expect`, the same names Mocha and Chai use in the JavaScript exercises.
   It prints HTML in the browser and plain text in the terminal.
