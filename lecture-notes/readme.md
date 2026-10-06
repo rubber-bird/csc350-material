@@ -1,27 +1,14 @@
 # CSC 350 - Lecture notes
 
-Notes for each topic in the order they're taught. Every file follows the same layout: Overview, Core Concepts, Important Facts & Definitions, Practical Examples, Nice to know, Further Reading. The first three also have a Going further section and Optional practice exercises.
+One file per topic, in teaching order. Each has the same sections: Overview, Core Concepts, Important Facts & Definitions, Practical Examples, Going further, Nice to know, Practice exercises, Further Reading.
 
-| # | Topic | Notes | What's inside |
-|:---:|---|---|---|
-| 1 | HTML & CSS | [html-css.md](html-css.md) | Page structure, text, links, images, lists, tables, forms. Simple CSS rules, selectors, the box model. |
-| 2 | JavaScript & DOM manipulation | [javascript-dom.md](javascript-dom.md) | Event handlers, elements, input fields, and JS fundamentals |
-| 3 | PHP | [php.md](php.md) | PHP fundamentals, handling forms, functions, and building pages |
-| 4 | SQL | [2026-09-24.md](2026-09-24.md) | Creating tables, reading and changing data, and how MySQL runs a query |
+| # | Notes | Covers |
+|:---:|---|---|
+| 1 | [html-css.md](html-css.md) | Page structure, text, links, images, lists, tables, forms; CSS selectors and the box model |
+| 2 | [javascript-dom.md](javascript-dom.md) | JS fundamentals, events, elements, input fields |
+| 3 | [php.md](php.md) | PHP fundamentals, forms, functions, building pages |
+| 4 | [2026-09-24.md](2026-09-24.md) | SQL: tables, reading and changing data, how MySQL runs a query |
+| 5 | [sql-database-design.md](sql-database-design.md) | Types, keys, relationships, normalization, indexes, constraints, character sets |
+| 6 | [sql-advanced.md](sql-advanced.md) | Joins, grouping, conditional values, indexes and search, FULLTEXT, transactions, encryption |
 
-## How the topics fit together
-
-```
-Browser                                   Server
-┌──────────────────────────┐              ┌──────────────────────────┐
-│  HTML & CSS  (1)         │   request    │  PHP  (3)                │
-│  what the page is and    │ ───────────► │  reads the form, checks  │
-│  how it looks            │              │  it, builds the HTML     │
-│                          │   response   │           │              │
-│  JavaScript  (2)         │ ◄─────────── │           ▼              │
-│  reacts to the user,     │              │  MySQL / SQL  (4)        │
-│  checks input early      │              │  stores and returns data │
-└──────────────────────────┘              └──────────────────────────┘
-```
-
-The term project uses all four: HTML and CSS for the pages, JavaScript for instant feedback on forms, PHP to handle registration, login and every database action, and SQL to store it all.
+How they fit: the browser shows HTML and CSS (1) and runs JavaScript (2) to react to the user. It sends requests to PHP (3) on the server, which checks the input, talks to MySQL (4 to 6) and builds the next page. The term project uses all of them.

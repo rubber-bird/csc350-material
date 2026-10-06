@@ -7,6 +7,7 @@
 - [Important Facts & Definitions](#important-facts--definitions)
 - [Practical Examples](#practical-examples)
 - [Nice to know](#nice-to-know)
+- [Practice exercises](#practice-exercises)
 - [Further Reading](#further-reading)
 
 ---
@@ -153,8 +154,9 @@ Aliases can be used in `ORDER BY`, but **not in `WHERE`**. MySQL filters rows (`
 |---|---|
 | `=`, `!=`, `<`, `>`, `<=`, `>=` | comparisons |
 | `IS NULL` / `IS NOT NULL` | has no value / has a value |
-| `BETWEEN a AND b` | within a range, **including** both ends |
-| `IN (a, b, c)` | matches any value in the list |
+| `BETWEEN a AND b` / `NOT BETWEEN` | within a range, **including** both ends / outside it |
+| `IN (a, b, c)` / `NOT IN` | matches any value in the list / none of them |
+| `IS TRUE` / `IS FALSE` | for `BOOLEAN` columns: has a true / false value |
 | `AND` / `OR` / `NOT` | both true / at least one true / reverses |
 | `XOR` | exactly one of two conditions is true |
 | `LIKE` / `NOT LIKE` | matches / doesn't match a pattern |
@@ -201,6 +203,7 @@ More detail: [DELETE](https://dev.mysql.com/doc/refman/8.4/en/delete.html), [TRU
 | Date/time | `CURDATE()` / `CURTIME()` | current date / current time |
 | Date/time | `DATE(dt)` | date part of a datetime |
 | Date/time | [`DATE_FORMAT(dt, format)`](https://dev.mysql.com/doc/refman/8.4/en/date-and-time-functions.html#function_date-format) | formats a date for display |
+| Date/time | [`TIME_FORMAT(t, format)`](https://dev.mysql.com/doc/refman/8.4/en/date-and-time-functions.html#function_time-format) | same, for the time part only (`'%T'` gives `14:30:00`) |
 | Other | [`SHA1(s)`](https://dev.mysql.com/doc/refman/8.4/en/encryption-functions.html#function_sha1), [`MD5(s)`](https://dev.mysql.com/doc/refman/8.4/en/encryption-functions.html#function_md5) | return a hash of the input |
 
 ### Date format codes you'll use most
@@ -339,6 +342,20 @@ ORDER BY len DESC LIMIT 1;
 
 > [!TIP]
 > **SHA1 and MD5 are fine for the educational or Proof of concept kind of things, but not for production environment.** The are not currently good to use. PHP projects usually use [`password_hash()`](https://www.php.net/manual/en/function.password-hash.php) and [`password_verify()`](https://www.php.net/manual/en/function.password-verify.php) instead of fast hashing algorithms. OWASP's [Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) explains why fast hashes are a problem and which algorithms to use instead.
+
+## Practice exercises
+
+The self-checking SQL exercises in [practice-material/sql](../practice-material/sql/README.md) start where these notes do. Modules 01 to 03 (`CREATE TABLE`, data types, primary keys) match this material; the rest follow the [database design](sql-database-design.md) and [advanced SQL](sql-advanced.md) notes.
+
+Exercises to do in phpMyAdmin or the mysql client, using the `students` table from these notes:
+
+1. **Build and fill.** Create the `students` table, insert six students with `INSERT` statements that name their columns, two of them in one statement, and leave `major` and `gpa` empty for at least one. Check the result with `SELECT *` and `SHOW COLUMNS FROM students`.
+2. **Predict, then run.** Before running each query, write down which of your six rows it returns: `WHERE gpa > 3.0`; `WHERE gpa = NULL`; `WHERE gpa IS NULL`; `WHERE major = 'Biology' OR major = 'History' AND gpa > 3.5`. Then add the parentheses that make the last one mean what it looks like.
+3. **Patterns.** Write queries for: last names ending in `son`; emails that are not at `college.edu`; first names that are exactly four letters long (use `_`, not `LENGTH`).
+4. **Paging.** Sort the roster by last name then first name and return page 2 with a page size of 2. Then write the query a PHP page would send for page `$p` with `$per_page` rows.
+5. **Safe changes.** Give one student a GPA with `UPDATE`, but run the `SELECT` with the same `WHERE` first. Then delete one student by primary key with `LIMIT 1`. Finally, say in one sentence what `UPDATE students SET gpa = 4.0;` would do.
+6. **Reshape the output.** Produce one column `name` as `Last, First`, one column `enrolled` formatted like `Monday, September 1, 2026`, and sort by the `name` alias. Explain why `WHERE name LIKE 'L%'` fails and rewrite it so it works.
+7. **Quotes.** Insert a student whose last name is `O'Brien`, and one whose enrollment date is today without typing today's date. Then insert `'NOW()'` in quotes on purpose, look at what was stored, and delete that row.
 
 ## Further Reading
 

@@ -1,39 +1,29 @@
-<div align="center">
-
 # CSC 350 - Practice material
 
-</div>
-
-Two sets of self-checking exercises. Each is a folder of files full of small functions with `// your code here` inside, plus tests that turn green as you fill them in. Do them in this order, alongside the matching [lecture notes](../lecture-notes/readme.md).
+Three sets of self-checking exercises: files with `your code here` markers and tests that turn green as you fill them in. Do them in this order, alongside the [lecture notes](../lecture-notes/readme.md).
 
 | # | Folder | Exercises | Needs | Start here |
 |:---:|---|:---:|---|---|
-| 1 | [javascript/](javascript/README.md) | 16 | a browser and internet | open `javascript/index.html` |
-| 2 | [php/](php/README.md) | 16 | XAMPP with Apache running (see below) | open http://localhost/php-fundamentals/ |
+| 1 | [javascript/](javascript/README.md) | 16 | a browser | open `javascript/index.html` |
+| 2 | [php/](php/README.md) | 16 | XAMPP with Apache | http://localhost/php-fundamentals/ |
+| 3 | [sql/](sql/README.md) | 12 | XAMPP with Apache and MySQL | http://localhost/sql-fundamentals/ |
 
-Each folder's own README explains its exercises, how to read a failing test, and what's under the hood. Both use the same test vocabulary (`describe`, `it`, `expect`), so once you've read one set of results you can read the other.
+All three use the same test vocabulary (`describe`, `it`, `expect`). Each folder's README explains its exercises and how to read a failing test.
 
-## Running the PHP exercises in XAMPP
+## PHP and SQL need XAMPP
 
-PHP runs on a web server, so unlike the JavaScript exercises it can't be opened as a plain file. With XAMPP installed and **Apache** started from its control panel, Apache serves whatever is inside its `htdocs` folder:
+PHP runs on a web server, so those two sets can't be opened as plain files. Apache serves whatever is in XAMPP's `htdocs` folder:
 
-| System | `htdocs` is at |
+| System | `htdocs` |
 |---|---|
 | Windows | `C:\xampp\htdocs` |
 | macOS | `/Applications/XAMPP/htdocs` |
 | Linux | `/opt/lampp/htdocs` |
 
-1. Drag the `php` folder from this repository into `htdocs`.
-2. Rename the copy to `php-fundamentals`, the name the PHP README and its runner expect:
+1. Copy the `php` folder into `htdocs` and rename the copy `php-fundamentals`. Do the same with `sql` as `sql-fundamentals`.
+2. Start **Apache** in the XAMPP control panel (and **MySQL** for the SQL set).
+3. Open http://localhost/php-fundamentals/ or http://localhost/sql-fundamentals/.
 
-   ```
-   C:\xampp\htdocs\php-fundamentals\              (Windows)
-   /Applications/XAMPP/htdocs/php-fundamentals/   (macOS)
-   ```
+Edit the files in `exercises/`, save, refresh. The SQL runner owns a database called `sql_fundamentals` and wipes it on every run.
 
-3. Open http://localhost/php-fundamentals/ in a browser.
-
-Every module shows red failing tests, and your job is to make them green. Edit the files in `exercises/`, save, and refresh the page.
-
-If you keep the folder named `php`, open http://localhost/php/ instead. Anything else you put in `htdocs` works the same way: `htdocs/club/index.php` is http://localhost/club/index.php, which is how the term project will run too.
- 
+Anything else in `htdocs` works the same way: `htdocs/club/index.php` is http://localhost/club/index.php, which is how the term project will run.
